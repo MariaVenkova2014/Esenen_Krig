@@ -1,0 +1,53 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int d[3], c[3];
+    for (int i = 0; i < 3; i++) {
+        cin >> d[i] >> c[i];
+    }
+
+    // Вътрешни диаметри
+    int inner[3];
+    for (int i = 0; i < 3; i++) {
+        inner[i] = d[i] - 2 * c[i];
+    }
+
+    // Функция дали a влиза в b
+    auto canInsert = [&](int a, int b) {
+        return d[a] <= inner[b];
+    };
+
+    // Започваме с най-лошия случай
+    int res = d[0] + d[1] + d[2];
+
+    // 1) Вложение на една чаша в друга, третата отделно
+    for (int a = 0; a < 3; a++) {
+        for (int b = 0; b < 3; b++) {
+            if (a != b && canInsert(a, b)) {
+                // третата чаша, различна от a и b
+                for (int c_ = 0; c_ < 3; c_++) {
+                    if (c_ != a && c_ != b) {
+                        int length = d[b] + d[c_];
+                        if (length < res) res = length;
+                    }
+                }
+            }
+        }
+    }
+
+    // 2) Вложение на две чаши една в друга (матрьошка), третата отделно
+    // Проверяваме всички подредби i->j->k, където i в j, j в k
+    int perm[3] = {0, 1, 2};
+    do {
+        int i = perm[0], j = perm[1], k = perm[2];
+        if (canInsert(i, j) && canInsert(j, k)) {
+            // Чашите i, j вложени в k, третата не остана (всички 3 са вложени)
+            if (d[k] < res) res = d[k];
+        }
+    } while (next_permutation(perm, perm + 3));
+
+    cout << res << "\n";
+    return 0;
+}
