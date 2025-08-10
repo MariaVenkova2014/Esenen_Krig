@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long N, P;
+    cin >> N >> P;
+
+    long long s1, s2, s3;
+    cin >> s1 >> s2 >> s3;
+
+    long long d1 = min((P > s1 ? P - s1 : s1 - P), N - (P > s1 ? P - s1 : s1 - P));
+    long long d2 = min((P > s2 ? P - s2 : s2 - P), N - (P > s2 ? P - s2 : s2 - P));
+    long long d3 = min((P > s3 ? P - s3 : s3 - P), N - (P > s3 ? P - s3 : s3 - P));
+
+    long long ans = d1;
+    if (d2 < ans) ans = d2;
+    if (d3 < ans) ans = d3;
+
+    cout << ans << endl;
+    return 0;
+}
