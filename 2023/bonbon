@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int hh, mm;
+    char c;
+    cin >> hh >> c >> mm;
+
+    int bonbons = 0;
+
+    for (int i = 0; i < 3; i++) {
+        if (hh >= 8 && hh <= 20) {
+            // броим четворките в часа
+            if (hh / 10 == 4) bonbons++;
+            if (hh % 10 == 4) bonbons++;
+            // броим четворките в минутите
+            if (mm / 10 == 4) bonbons++;
+            if (mm % 10 == 4) bonbons++;
+        }
+
+        if (i != 2) { // след последната минута не увеличаваме
+            mm++;
+            if (mm == 60) {
+                mm = 0;
+                hh++;
+                if (hh == 24) hh = 0;
+            }
+        }
+    }
+
+    if (hh < 10) cout << "0";
+    cout << hh << ":";
+    if (mm < 10) cout << "0";
+    cout << mm << " " << bonbons << endl;
+
+    return 0;
+}
