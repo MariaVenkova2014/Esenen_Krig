@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int h, m;
+    cin >> h >> m;
+
+    // Начални ъгли
+    double hour_angle = (h % 12) * 30 + m * 0.5;
+    double minute_angle = m * 6;
+
+    // Разлика, положителна в [0, 360)
+    double diff = minute_angle - hour_angle;
+    if (diff < 0) diff += 360;
+
+    // Изчисляваме t
+    int t = int(2 * diff + 0.5);
+
+    // Ако t == 0, вземаме следващия път (часовата стрелка прави пълен оборот за 720 минути)
+    if (t == 0) t = 720;
+
+    // Изчисляваме новото време
+    int total_minutes = h * 60 + m + t;
+    int new_h = (total_minutes / 60) % 12;
+    int new_m = total_minutes % 60;
+
+    if (new_h == 0) new_h = 12;
+
+    // Времето изминало
+    int delta_h = t / 60;
+    int delta_m = t % 60;
+
+    cout << new_h << " " << new_m << "\n";
+    cout << delta_h << " " << delta_m << "\n";
+
+    return 0;
+}
