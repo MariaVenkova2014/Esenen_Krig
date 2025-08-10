@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int S;
+    if (!(cin >> S)) return 0;
+    // най-малката възможна стойност за x е 10 (двуцифрено)
+    if (S <= 20) { // за всички x >= 10 имаме 2*x >= 20
+        cout << "0 0 0\n";
+        return 0;
+    }
+    int x = (S - 1) / 2;        // най-голямо x с 2*x < S
+    if (x > 99) x = 99;
+    if (x < 10) {
+        cout << "0 0 0\n";
+        return 0;
+    }
+    int sum = 2 * x;
+    int a = 10 * x;
+    int t = x / 10; // стотици на b
+    int u = x % 10; // единици на b
+    int b = 100 * t + u;
+    cout << sum << " " << a << " " << b << "\n";
+    return 0;
+}
