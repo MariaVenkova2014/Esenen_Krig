@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long a, b, c, d, e, k;
+    cin >> a >> b >> c >> d >> e;
+    cin >> k;
+
+    // Използваме прости max изчисления, за по-голяма съвместимост:
+    long long high = a;
+    if (b > high) high = b;
+    if (c > high) high = c;
+    if (d > high) high = d;
+    if (e > high) high = e;
+
+    long long low = 0;
+
+    while (low < high) {
+        long long mid = (low + high) / 2;
+        long long needed = 0;
+
+        if (a > mid) needed += (a - mid);
+        if (b > mid) needed += (b - mid);
+        if (c > mid) needed += (c - mid);
+        if (d > mid) needed += (d - mid);
+        if (e > mid) needed += (e - mid);
+
+        if (needed <= k) {
+            high = mid;
+        } else {
+            low = mid + 1;
+        }
+    }
+
+    cout << low << "\n";
+    return 0;
+}
