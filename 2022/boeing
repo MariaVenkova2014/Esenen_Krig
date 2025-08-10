@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main() {
+    int n;
+    string reserved;
+    cin >> n >> reserved;
+
+    vector<string> seats;
+
+    // ред 1: D, E, F
+    seats.push_back("1D");
+    seats.push_back("1E");
+    seats.push_back("1F");
+
+    // редове 2 до 20: A, B, C, D, E, F
+    string letters = "ABCDEF";
+    for (int row = 2; row <= 20; row++) {
+        for (char seat : letters) {
+            string name = to_string(row) + seat;
+            seats.push_back(name);
+        }
+    }
+
+    // ред 21: D, E
+    seats.push_back("21D");
+    seats.push_back("21E");
+
+    // Премахване на служебното място
+    vector<string> finalSeats;
+    for (string s : seats) {
+        if (s != reserved) finalSeats.push_back(s);
+    }
+
+    // Проверка
+    if (n >= (int)finalSeats.size()) {
+        cout << "full";
+    } else {
+        cout << finalSeats[n];
+    }
+    return 0;
+}
