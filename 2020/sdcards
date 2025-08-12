@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    int total_minutes = 0;
+    for (int i = 0; i < N; i++) {
+        int h, m;
+        cin >> h >> m;
+        total_minutes += h * 60 + m;
+    }
+
+    // Цени в стотинки за избягване на плаващи точки
+    int price_240 = 1090; // 10.90 лв
+    int price_180 = 915;  // 9.15 лв
+
+    int min_price = 1e9; // много голяма стойност
+
+    // Максимален брой карти тип 1, които може да се вземат
+    int max_240 = (total_minutes + 239) / 240;
+
+    for (int cards_240 = 0; cards_240 <= max_240; cards_240++) {
+        int capacity_240 = cards_240 * 240;
+        int remaining = total_minutes - capacity_240;
+        if (remaining < 0) remaining = 0;
+
+        int cards_180 = (remaining + 179) / 180; // ceil
+
+        int total_price = cards_240 * price_240 + cards_180 * price_180;
+
+        if (total_price < min_price) {
+            min_price = total_price;
+        }
+    }
+
+    // Превръщаме обратно в левове и стотинки
+    int leva = min_price / 100;
+    int stotinki = min_price % 100;
+
+    cout << leva << ".";
+
+    // ако стотинките са по-малко от 10, добавяме водеща 0
+    if (stotinki < 10) cout << "0";
+
+    cout << stotinki << endl;
+
+    return 0;
+}
