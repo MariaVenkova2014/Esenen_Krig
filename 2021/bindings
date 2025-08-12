@@ -1,0 +1,55 @@
+#include <iostream>
+#include <algorithm>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    // textbook
+    int tb1_cm, tb1_mm, tb2_cm, tb2_mm;
+    cin >> tb1_cm >> tb1_mm >> tb2_cm >> tb2_mm;
+
+    // cover 1
+    int c1a_cm, c1a_mm, c1b_cm, c1b_mm;
+    cin >> c1a_cm >> c1a_mm >> c1b_cm >> c1b_mm;
+
+    // cover 2
+    int c2a_cm, c2a_mm, c2b_cm, c2b_mm;
+    cin >> c2a_cm >> c2a_mm >> c2b_cm >> c2b_mm;
+
+    // convert to millimetres (1 cm = 10 mm)
+    int tbSide1 = tb1_cm * 10 + tb1_mm;
+    int tbSide2 = tb2_cm * 10 + tb2_mm;
+    int tbWidth = min(tbSide1, tbSide2);
+    int tbHeight = max(tbSide1, tbSide2);
+
+    int c1Side1 = c1a_cm * 10 + c1a_mm;
+    int c1Side2 = c1b_cm * 10 + c1b_mm;
+    int c1Width = min(c1Side1, c1Side2);
+    int c1Height = max(c1Side1, c1Side2);
+
+    int c2Side1 = c2a_cm * 10 + c2a_mm;
+    int c2Side2 = c2b_cm * 10 + c2b_mm;
+    int c2Width = min(c2Side1, c2Side2);
+    int c2Height = max(c2Side1, c2Side2);
+
+    // fit condition: at least 5 mm on each side => cover.width >= tb.width + 10
+    bool fits1 = (c1Width >= tbWidth + 10) && (c1Height >= tbHeight);
+    bool fits2 = (c2Width >= tbWidth + 10) && (c2Height >= tbHeight);
+
+    int chosen = 0;
+    int chosenW = 0, chosenH = 0;
+    if (fits1 && fits2) {
+        if (c1Width < c2Width) { chosen = 1; chosenW = c1Width; chosenH = c1Height; }
+        else { chosen = 2; chosenW = c2Width; chosenH = c2Height; }
+    } else if (fits1) {
+        chosen = 1; chosenW = c1Width; chosenH = c1Height;
+    } else if (fits2) {
+        chosen = 2; chosenW = c2Width; chosenH = c2Height;
+    }
+
+    cout << chosen << '\n';
+    if (chosen != 0) {
+        cout << fixed << setprecision(1) << (chosenW / 10.0) << ' ' << (chosenH / 10.0) << '\n';
+    }
+    return 0;
+}
