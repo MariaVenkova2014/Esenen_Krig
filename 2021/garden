@@ -1,0 +1,11 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long w1, h1, w2, h2;
+    if (!(cin >> w1 >> h1 >> w2 >> h2)) return 0;
+
+    long long answer = 4 + 2 * max(w1, w2) + 2 * (h1 + h2);
+    cout << answer << '\n';
+    return 0;
+}
