@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int h, m, dh, dm, c;
+    cin >> h >> m >> dh >> dm >> c;
+
+    // Добавяме изминалото време
+    int total_minutes = h * 60 + m + dh * 60 + dm;
+
+    // Преобразуваме във формат 12 часа
+    total_minutes %= (12 * 60); // 12 часа = 720 минути
+
+    int new_h = total_minutes / 60;
+    int new_m = total_minutes % 60;
+
+    if (c == 1) {
+        cout << new_h << " " << new_m << "\n";
+    } else if (c == 2) {
+        // Позиция на часовата стрелка на минутната скала (0..59)
+        // Часовата стрелка минава 5 деления за 1 час, + 1/12 деление за всяка минута
+        double pos = new_h * 5 + new_m / 12.0;
+
+        // Кръг от 60 деления
+        pos = fmod(pos, 60.0);
+
+        int left = (int)floor(pos);
+        int right = (left + 1) % 60;
+
+        if (fabs(pos - left) < 1e-9) {
+            // Точно на деление
+            cout << "@ " << left << "\n";
+        } else {
+            // Между две деления
+            cout << left << " " << right << "\n";
+        }
+    }
+
+    return 0;
+}
