@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+int main() {
+    int N;
+    string s;
+    cin >> N >> s;
+
+    bool found = false;
+    int num = 0;
+    bool inNumber = false;
+
+    for (int i = 0; i < (int)s.size(); i++) {
+        if (isdigit(s[i])) {
+            num = num * 10 + (s[i] - '0');
+            inNumber = true;
+        } else {
+            if (inNumber) {
+                cout << num * N << endl;
+                num = 0;
+                inNumber = false;
+                found = true;
+            }
+        }
+    }
+
+    // ако завършва с число
+    if (inNumber) {
+        cout << num * N << endl;
+        found = true;
+    }
+
+    if (!found) {
+        cout << "N/A" << endl;
+    }
+
+    return 0;
+}
