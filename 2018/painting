@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long A, B, C, D;
+    cin >> A >> B >> C >> D;
+
+    long long L1 = min(A, B), R1 = max(A, B);
+    long long L2 = min(C, D), R2 = max(C, D);
+
+    long long len1 = R1 - L1 + 1;
+    long long len2 = R2 - L2 + 1;
+
+    long long overlapLeft  = max(L1, L2);
+    long long overlapRight = min(R1, R2);
+    long long overlap = 0;
+    if (overlapLeft <= overlapRight) overlap = overlapRight - overlapLeft + 1;
+
+    cout << (len1 + len2 - overlap) << "\n";
+    return 0;
+}
