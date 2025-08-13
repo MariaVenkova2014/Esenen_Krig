@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int d1, d2;
+    cin >> d1 >> d2;
+
+    // преобразуваме в километри (цяла част)
+    int km1 = d1 / 1000;
+    int km2 = d2 / 1000;
+
+    auto priceFirm1 = [&](int km) {
+        if (km <= 5) return 400;
+        if (km <= 10) return 700;
+        if (km <= 20) return 1200;
+        if (km <= 30) return 1700;
+        return km * 57; // в стотинки
+    };
+
+    auto priceFirm2 = [&](int km) {
+        if (km <= 2) return 90 + km * 90;
+        if (km <= 5) return 100 + km * 85;
+        if (km <= 20) return 125 + km * 80;
+        if (km <= 40) return 325 + km * 70;
+        return 925 + km * 55;
+    };
+
+    int minTotal = 1e9;
+    // пробваме всички варианти: (фирма1 за първи, фирма2 за втори) и обратно
+    int total1 = priceFirm1(km1) + priceFirm1(km2);
+    int total2 = priceFirm1(km1) + priceFirm2(km2);
+    int total3 = priceFirm2(km1) + priceFirm1(km2);
+    int total4 = priceFirm2(km1) + priceFirm2(km2);
+
+    minTotal = min(min(min(total1, total2), total3), total4);
+
+    cout << minTotal / 100 << "." << (minTotal % 100 < 10 ? "0" : "") << minTotal % 100 << endl;
+}
