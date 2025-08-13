@@ -1,0 +1,41 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    int t1, t2; // час и минути на конференцията
+    cin >> t1 >> t2;
+
+    int t3; // време за регистрация
+    cin >> t3;
+
+    int t4, t5; // време за пътуване
+    cin >> t4 >> t5;
+
+    int br; // брой ученици
+    cin >> br;
+
+    int t6; // време за настаняване на един ученик
+    cin >> t6;
+
+    // изчисляване на общото време за подготовка
+    int totalHotelTime = br * t6;
+    int totalPreparationTime = t3 + totalHotelTime + 10;
+    int travelTime = t4 * 60 + t5;
+    int totalTimeBack = totalPreparationTime + travelTime;
+
+    // час на конференцията в минути
+    int conferenceTime = t1 * 60 + t2;
+
+    // най-късно тръгване
+    int departureTime = conferenceTime - totalTimeBack;
+
+    int h = departureTime / 60;
+    int m = departureTime % 60;
+
+    // печат с водещи нули
+    cout << setw(2) << setfill('0') << h << " "
+         << setw(2) << setfill('0') << m << endl;
+
+    return 0;
+}
