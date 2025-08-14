@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long a, b, c;
+	cin >> a >> b >> c;
+
+	long long result = 0;
+	
+	long long maxNum = a;
+	if (b > maxNum) maxNum = b;
+	if (c > maxNum) maxNum = c;
+
+	long long minNum = a;
+	if (b < minNum) minNum = b;
+	if (c < minNum) minNum = c;
+
+	long long midNum = a;
+	if (b != maxNum && b != minNum) midNum = b;
+	if (c != maxNum && c != minNum) midNum = c;
+
+	result = maxNum * midNum + minNum;
+	cout << result << endl;
+}
