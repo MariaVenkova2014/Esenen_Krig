@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x, n;
+    cin >> x >> n;
+    int d, m, g;
+    cin >> d >> m >> g;
+
+    int daysInMonth[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+    auto leap = [&](int year) {
+        return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
+    };
+
+    int totalDays = ( (2 * x - 1) * n ) - 1;
+    d += totalDays;
+
+    while (true) {
+        if (m == 2 && leap(g)) daysInMonth[2] = 29;
+        else daysInMonth[2] = 28;
+
+        if (d > daysInMonth[m]) {
+            d -= daysInMonth[m];
+            m++;
+            if (m > 12) {
+                m = 1;
+                g++;
+            }
+        } else break;
+    }
+
+    cout << d << " " << m << " " << g << endl;
+    return 0;
+}
