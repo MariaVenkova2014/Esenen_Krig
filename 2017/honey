@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long n, a, b, c;
+    if (!(cin >> n >> a >> b >> c)) return 0;
+
+    long long total_cm = 0;
+    if (n == 1) {
+        total_cm = 0;
+    } else {
+        long long option1 = a + (n - 2) * (a < c ? a : c); // първо към Бухала
+        long long option2 = b + (n - 2) * (b < c ? b : c); // първо към Йори
+        total_cm = option1 < option2 ? option1 : option2;
+    }
+
+    cout << (total_cm / 100) << " " << (total_cm % 100);
+    return 0;
+}
