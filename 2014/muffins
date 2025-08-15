@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long price[3], count[3], money;
+    for (int i = 0; i < 3; i++) cin >> price[i];
+    for (int i = 0; i < 3; i++) cin >> count[i];
+    cin >> money;
+
+    long long total = 0;
+
+    // Купуваме първо най-евтините
+    for (int i = 0; i < 3; i++) {
+        for (int j = i + 1; j < 3; j++) {
+            if (price[j] < price[i]) {
+                swap(price[i], price[j]);
+                swap(count[i], count[j]);
+            }
+        }
+    }
+
+    for (int i = 0; i < 3; i++) {
+        if (price[i] == 0) { // безплатни
+            total += count[i];
+            continue;
+        }
+        long long canBuy = money / price[i];
+        if (canBuy > count[i]) canBuy = count[i];
+        total += canBuy;
+        money -= canBuy * price[i];
+    }
+
+    cout << total;
+    return 0;
+}
