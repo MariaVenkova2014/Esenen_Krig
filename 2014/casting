@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int mode;
+    cin >> mode;
+    int n, a, b, c;
+    cin >> n >> a >> b >> c;
+
+    if (mode == 2) {
+        cout << min(a, min(b, c));
+    } else {
+        int minPossible = a + b + c - 2 * n;
+        if (minPossible < 0) minPossible = 0;
+        cout << minPossible;
+    }
+
+    return 0;
+}
