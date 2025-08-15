@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int M, N;
+    cin >> M >> N;
+    int w[4];
+    for (int i = 0; i < 4; i++) cin >> w[i];
+
+    int best = 4; // най-много по един човек на курс
+
+    // Всички начини за качване - ще използваме битови маски за курс 1, курс 2 и т.н.
+    // Ще търсим минималния брой курсове.
+    for (int mask1 = 1; mask1 < (1 << 4); mask1++) {
+        int cnt1 = 0, sum1 = 0;
+        for (int i = 0; i < 4; i++)
+            if (mask1 & (1 << i)) { cnt1++; sum1 += w[i]; }
+        if (cnt1 > M || sum1 > N) continue;
+
+        // Кои деца остават след първия курс
+        int rem1 = ((1 << 4) - 1) ^ mask1;
+
+        if (rem1 == 0) { best = min(best, 1); continue; }
+
+        for (int mask2 = 1; mask2 < (1 << 4); mask2++) {
+            if ((mask2 & rem1) != mask2) continue; // mask2 трябва да е подмножество на оставащите
+            int cnt2 = 0, sum2 = 0;
+            for (int i = 0; i < 4; i++)
+                if (mask2 & (1 << i)) { cnt2++; sum2 += w[i]; }
+            if (cnt2 > M || sum2 > N) continue;
+
+            int rem2 = rem1 ^ mask2;
+            if (rem2 == 0) { best = min(best, 2); continue; }
+
+            for (int mask3 = 1; mask3 < (1 << 4); mask3++) {
+                if ((mask3 & rem2) != mask3) continue;
+                int cnt3 = 0, sum3 = 0;
+                for (int i = 0; i < 4; i++)
+                    if (mask3 & (1 << i)) { cnt3++; sum3 += w[i]; }
+                if (cnt3 > M || sum3 > N) continue;
+
+                int rem3 = rem2 ^ mask3;
+                if (rem3 == 0) { best = min(best, 3); continue; }
+
+                // останалите ще са в четвъртия курс
+                int cnt4 = 0, sum4 = 0;
+                for (int i = 0; i < 4; i++)
+                    if (rem3 & (1 << i)) { cnt4++; sum4 += w[i]; }
+                if (cnt4 <= M && sum4 <= N) best = min(best, 4);
+            }
+        }
+    }
+
+    cout << best << endl;
+    return 0;
+}
