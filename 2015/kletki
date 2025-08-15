@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N, K;
+    cin >> N >> K;
+
+    int emptyCells = N - K;
+    int d = emptyCells / (K - 1);
+    int extra = emptyCells % (K - 1);
+
+    int countPairs = (K - 1) - extra; // толкова двойки имат разстояние d
+    cout << countPairs << endl;
+
+    return 0;
+}
