@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int A, B, C;
+    cin >> A >> B >> C;
+
+    int sum = A + B + C;
+    int target = sum / 3;
+    int moves = 0;
+
+    // Първо дясно -> ляво (2 метра)
+    int moveRightToLeft = min(target - A, C - target);
+    if (moveRightToLeft > 0) {
+        moves += moveRightToLeft * 2;
+        A += moveRightToLeft;
+        C -= moveRightToLeft;
+    }
+
+    // После дясно -> средно (1 метър)
+    int moveRightToMiddle = C - target;
+    if (moveRightToMiddle > 0) {
+        moves += moveRightToMiddle * 1;
+        B += moveRightToMiddle;
+        C -= moveRightToMiddle;
+    }
+
+    // И накрая средно -> ляво (1 метър)
+    int moveMiddleToLeft = target - A;
+    if (moveMiddleToLeft > 0) {
+        moves += moveMiddleToLeft * 1;
+        A += moveMiddleToLeft;
+        B -= moveMiddleToLeft;
+    }
+
+    cout << moves << endl;
+}
