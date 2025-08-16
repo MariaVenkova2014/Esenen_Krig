@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long a, b, k;
+    if (!(cin >> a >> b >> k)) return 0;
+
+    long long P = 2 * (a + b);          // обща дължина на рамката
+    long long ans = (P + k - 1) / k;    // ceil(P / k) без дробни числа
+
+    cout << ans << '\n';
+    return 0;
+}
