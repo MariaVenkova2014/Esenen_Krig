@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int sh, sm, eh, em;
+    int minTime = 1e9, maxTime = -1;
+
+    for (int i = 0; i < 3; i++) {
+        cin >> sh >> sm >> eh >> em;
+
+        int start = sh * 60 + sm;
+        int end = eh * 60 + em;
+
+        if (end < start) end += 24 * 60; // ако е на следващия ден
+
+        int duration = end - start;
+
+        if (duration < minTime) minTime = duration;
+        if (duration > maxTime) maxTime = duration;
+    }
+
+    cout << minTime / 60 << ":" 
+         << (minTime % 60 < 10 ? "0" : "") << minTime % 60 << "\n";
+
+    cout << maxTime / 60 << ":" 
+         << (maxTime % 60 < 10 ? "0" : "") << maxTime % 60 << "\n";
+
+    return 0;
+}
