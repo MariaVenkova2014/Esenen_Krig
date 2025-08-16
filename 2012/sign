@@ -12,25 +12,22 @@ int main() {
 
     string result = s1;
 
-    // сравняваме c1 и c2
+    // сравняваме последната цифра на s1 с първата на s2
     if (s1.back() == s2.front()) {
-        result += s2.substr(1) + "'";
+        result += "'" + s2.substr(1);
     } else {
         result += s2;
     }
 
-    // последна цифра преди апостроф
+    // сравняваме последната цифра на текущия резултат с първата на s3
     char lastDigit = result.back();
-    if (lastDigit == '\'') lastDigit = result[result.size() - 2];
-
-    // сравняваме с c3
     if (lastDigit == s3.front()) {
-        result += s3.substr(1) + "'";
+        result += "'" + s3.substr(1);
     } else {
         result += s3;
     }
 
-    cout << result;
+    cout << result << endl;
 
     return 0;
 }
