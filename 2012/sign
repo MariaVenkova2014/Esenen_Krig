@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    int c1, c2, c3;
+    cin >> c1 >> c2 >> c3;
+
+    string s1 = to_string(c1);
+    string s2 = to_string(c2);
+    string s3 = to_string(c3);
+
+    string result = s1;
+
+    // сравняваме c1 и c2
+    if (s1.back() == s2.front()) {
+        result += s2.substr(1) + "'";
+    } else {
+        result += s2;
+    }
+
+    // последна цифра преди апостроф
+    char lastDigit = result.back();
+    if (lastDigit == '\'') lastDigit = result[result.size() - 2];
+
+    // сравняваме с c3
+    if (lastDigit == s3.front()) {
+        result += s3.substr(1) + "'";
+    } else {
+        result += s3;
+    }
+
+    cout << result;
+
+    return 0;
+}
