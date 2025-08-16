@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int A, B, C;
+    cin >> A >> B >> C;
+
+    if (A == C) {
+        // вече е симетрично: ABC
+        cout << A << B << C;
+    } else if (B == C) {
+        // можем да направим четно симетрично: AB C BA
+        cout << A << B << C << B << A;
+    } else {
+        // иначе най-малкото е нечетно симетрично: ABC CBA
+        cout << A << B << C << B << A;
+    }
+
+    return 0;
+}
