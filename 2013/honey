@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long A1, A2, A3; // price for 1kg of each type of honey
+	long long B1, B2, B3; // how much kg of honey the container can hold
+	cin >> A1 >> A2 >> A3;
+	cin >> B1 >> B2 >> B3;
+
+	long long totalEarning = 0;
+
+	long long maxHoney = A1; // Looking for the gretest price
+	if (A2 > maxHoney) maxHoney = A2;
+	if (A3 > maxHoney) maxHoney = A3;
+
+	long long minHoney = A1; // Looking for the lowest price
+	if (A2 < minHoney) minHoney = A2;
+	if (A3 < minHoney) minHoney = A3;
+
+	long long middleHoney = A1 + A2 + A3 - maxHoney - minHoney; // The remaining one is the middle price
+
+	long long maxKg = B1; // Looking for the greatest kg capacity
+	if (B2 > maxKg) maxKg = B2;
+	if (B3 > maxKg) maxKg = B3;
+
+	long long minKg = B1; // Looking for the lowest kg capacity
+	if (B2 < minKg) minKg = B2;
+	if (B3 < minKg) minKg = B3;
+
+	long long middleKg = B1 + B2 + B3 - maxKg - minKg; // The remaining one is the middle capacity
+
+	// Calculate the total earnings
+
+	totalEarning = (maxHoney * maxKg) + (middleHoney * middleKg) + (minHoney * minKg);
+
+	cout << totalEarning << endl;
+
+}
