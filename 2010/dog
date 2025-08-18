@@ -1,0 +1,11 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N, M, K;
+    if (!(cin >> N >> M >> K)) return 0;
+    int gain = K - M; // гарантирано > 0
+    int jumps = (N + gain - 1) / gain; // ceil(N / gain)
+    cout << jumps << endl;
+    return 0;
+}
