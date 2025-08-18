@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long x, y; // P of the rectangle in meters and centimeters
+	long long d; // One side is d bigger than the other side
+	cin >> x >> y >> d;
+
+	long long perimeter = x * 100 + y; // Convert to centimeters
+	long long length = (perimeter / 2 + d) / 2; // Length of the longer side in centimeters
+
+	long long width = (perimeter / 2 - d) / 2; // Width of the shorter side in centimeters
+
+	cout << length / 100 << " " << length % 100 << endl; // Convert back to meters and centimeters
+	cout << width / 100 << " " << width % 100 << endl; // Convert back to meters and centimeters
+}
