@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    string s;
+    if (!(cin >> s)) return 0;          // Очакваме точно 6 символа (3 главни букви + 3 цифри)
+
+    vector<char> L, D;                  // L = Letters, D = Digits
+    for (char c : s) {
+        if (c >= 'A' && c <= 'Z') L.push_back(c);
+        else if (c >= '0' && c <= '9') D.push_back(c);
+    }
+
+    // Сортираме: буквите във възходящ ред (A..Z), цифрите в низходящ (9..0)
+    sort(L.begin(), L.end());                           // A < B < ...
+    sort(D.begin(), D.end(), greater<char>());          // 9 > 8 > ...
+
+    // Извеждаме в шаблон: L0 D0 L1 D1 L2 D2
+    cout << L[0] << D[0] << L[1] << D[1] << L[2] << D[2];
+    return 0;
+}
