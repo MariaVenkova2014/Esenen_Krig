@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int k;
+    if (!(cin >> k)) return 0;
+
+    int h = k / 100;        // стотици
+    int t = (k / 10) % 10;  // десетици
+    int u = k % 10;         // единици
+
+    // Първа цифра: сума на стотици и десетици, редуцирана до една цифра
+    int a = h + t;
+    if (a >= 10) a = (a / 10) + (a % 10);
+
+    // Втора и трета цифра: според четността на единицата
+    int y = (u % 2 == 0) ? (2 * u) : (u + t);
+    int b = y / 10;
+    int c = y % 10;
+
+    int ans = 100 * a + 10 * b + c;
+    cout << ans;
+    return 0;
+}
