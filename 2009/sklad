@@ -1,0 +1,11 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long n, k, m;
+    cin >> n >> k >> m;
+
+    long long L = n - m - k / 2.0; // смятаме с double
+    cout << (int)(L + 0.5) << endl; // закръгляме до най-близко цяло
+    return 0;
+}
