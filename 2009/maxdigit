@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int B, C, D, K;
+    cin >> B >> C >> D >> K;
+
+    int nums[3] = {B, C, D};
+    int maxDigit = -1;
+
+    for (int i = 0; i < 3; i++) {
+        int n = nums[i];
+        int d;
+        if (K == 1) d = n / 100;            // първа цифра
+        else if (K == 2) d = (n / 10) % 10; // втора цифра
+        else d = n % 10;                    // трета цифра
+
+        if (d > 4) { // условие A>4
+            if (d > maxDigit) maxDigit = d;
+        }
+    }
+
+    if (maxDigit == -1) cout << "No" << endl;
+    else cout << maxDigit << endl;
+
+    return 0;
+}
