@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long a, b, c, d, e, f;
+	cin >> a >> b >> c >> d >> e >> f;
+
+	long long score = a + b + c + d + e + f;
+
+	long long maxNum = a;
+	if (b > maxNum) maxNum = b;
+	if (c > maxNum) maxNum = c;
+	if (d > maxNum) maxNum = d;
+	if (e > maxNum) maxNum = e;
+	if (f > maxNum) maxNum = f;
+
+	long long minNum = a;
+	if (b < minNum) minNum = b;
+	if (c < minNum) minNum = c;
+	if (d < minNum) minNum = d;
+	if (e < minNum) minNum = e;
+	if (f < minNum) minNum = f;
+
+	score -= maxNum;
+	score -= minNum;
+
+	score /= 4;
+
+	cout << score << endl;
+	return 0;
+}
