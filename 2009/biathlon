@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long m, s, i;
+    long long bestTime = 1e18;
+    char winner;
+
+    for (int k = 0; k < 3; k++) {
+        cin >> m >> s >> i;
+        long long total = m * 60 + s + (5 - i) * 30;
+        if (total < bestTime) {
+            bestTime = total;
+            winner = 'A' + k;
+        }
+    }
+
+    cout << bestTime / 60 << " " << bestTime % 60 << " " << winner << endl;
+    return 0;
+}
