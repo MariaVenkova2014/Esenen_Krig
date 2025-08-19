@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+
+    // Извличаме цифрите
+    int d1 = s[2] - '0';
+    int d2 = s[3] - '0';
+    int d3 = s[4] - '0';
+    int d4 = s[5] - '0';
+
+    int product = d1 * d2 * d3 * d4;
+
+    // Сумираме ASCII кодовете на първите две и последните две букви
+    int sum_letters = s[0] + s[1] + s[6] + s[7];
+
+    if (product == sum_letters / 10)
+        cout << "Yes " << product;
+    else
+        cout << "No";
+
+    return 0;
+}
