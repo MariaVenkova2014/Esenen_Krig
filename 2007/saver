@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long N;
+    cin >> N;
+
+    long long pricePack = 12;
+    long long priceStack = 82;   // 8 пакета
+    long long priceBox   = 3050; // 320 пакета
+
+    long long bestCost = 1e18;
+    long long bestBoxes = 0, bestStacks = 0, bestPacks = 0;
+
+    // Опитваме 2 възможности за кутии: точно N/320 и +1
+    for (long long boxes = N / 320; boxes <= N / 320 + 1; boxes++) {
+        if (boxes < 0) continue;
+        long long remAfterBoxes = N - boxes * 320;
+        if (remAfterBoxes < 0) remAfterBoxes = 0;
+
+        // Опитваме 2 възможности за стекове: точно /8 и +1
+        for (long long stacks = remAfterBoxes / 8; stacks <= remAfterBoxes / 8 + 1; stacks++) {
+            if (stacks < 0) continue;
+            long long remAfterStacks = remAfterBoxes - stacks * 8;
+            if (remAfterStacks < 0) remAfterStacks = 0;
+
+            long long packs = remAfterStacks;
+
+            long long cost = boxes * priceBox + stacks * priceStack + packs * pricePack;
+            if (cost < bestCost) {
+                bestCost = cost;
+                bestBoxes = boxes;
+                bestStacks = stacks;
+                bestPacks = packs;
+            }
+        }
+    }
+
+    cout << bestBoxes << " " << bestStacks << " " << bestPacks << "\n";
+    return 0;
+}
