@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    long long a, b, x, y;
+    if (!(cin >> a >> b >> x >> y)) return 0;
+
+    long long cnt1 = (a / x) * (b / y); // без ротиране
+    long long cnt2 = (a / y) * (b / x); // с ротиране на 90°
+    long long best = max(cnt1, cnt2);
+
+    long long area_left = a * b - best * (x * y);
+
+    cout << best << "\n" << area_left << "\n";
+    return 0;
+}
