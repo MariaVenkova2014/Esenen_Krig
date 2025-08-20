@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long l1, end1, l2, end2, l3, end3;
+	cin >> l1 >> end1 >> l2 >> end2 >> l3 >> end3;
+
+	long long start1 = end1 - l1;
+	long long start2 = end2 - l2;
+	long long start3 = end3 - l3;
+
+	int minNum = start1;
+	if (start2 < minNum) minNum = start2;
+	if (start3 < minNum) minNum = start3;
+
+	cout << minNum << endl;
+}
